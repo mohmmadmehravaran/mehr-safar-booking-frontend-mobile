@@ -143,8 +143,8 @@ export default function HotelCard({ hotel, index = 0 }: HotelCardProps) {
       <Link to={`/hotel/${hotel.id}`} className="flex flex-col flex-1 min-h-0">
         {/* Image carousel */}
         <div
-          className="relative overflow-hidden [touch-action:pan-x_pan-y] select-none cursor-grab active:cursor-grabbing flex-1 min-h-0"
-          style={{ minHeight: theme.sizes.cardImageHeight }}
+          className="relative overflow-hidden [touch-action:pan-x_pan-y] select-none cursor-grab active:cursor-grabbing w-full shrink-0"
+          style={{ height: theme.sizes.cardImageHeight }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={endDrag}
@@ -238,8 +238,8 @@ export default function HotelCard({ hotel, index = 0 }: HotelCardProps) {
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-5">
+        {/* Content — ارتفاع کادر سفید در همهٔ کارت‌ها یکسان */}
+        <div className="p-5 flex-1 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between gap-3 mb-3">
             <div className="flex-1 min-w-0">
@@ -260,26 +260,26 @@ export default function HotelCard({ hotel, index = 0 }: HotelCardProps) {
             <span className="text-xs truncate">{hotel.city}، {hotel.address}</span>
           </div>
 
-          {/* Amenities */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          {/* Amenities — تک‌خطی تا ارتفاع محتوا ثابت بماند */}
+          <div className="flex flex-nowrap gap-1.5 mb-4 overflow-hidden">
             {hotel.amenities.slice(0, 3).map((amenity) => (
               <span
                 key={amenity}
-                className="inline-flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-lg text-xs text-gray-600"
+                className="inline-flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-lg text-xs text-gray-600 shrink-0 whitespace-nowrap"
               >
                 {amenityIcons[amenity] || null}
                 {amenity}
               </span>
             ))}
             {hotel.amenities.length > 3 && (
-              <span className="px-2 py-1 bg-gray-50 rounded-lg text-xs text-gray-500">
+              <span className="px-2 py-1 bg-gray-50 rounded-lg text-xs text-gray-500 shrink-0 whitespace-nowrap">
                 +{hotel.amenities.length - 3}
               </span>
             )}
           </div>
 
           {/* CTA */}
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
             <span className="text-sm font-semibold" style={{ color: theme.colors.textPrimary }}>
               مشاهده و رزرو
             </span>
