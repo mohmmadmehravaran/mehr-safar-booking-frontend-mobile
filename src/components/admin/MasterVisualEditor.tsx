@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { motion } from 'framer-motion';
 import {
   X, Move, Type, Palette, RotateCcw, EyeOff, Eye,
   Image as ImageIcon, Link as LinkIcon, AlignRight, AlignCenter, AlignLeft,
@@ -1667,19 +1668,22 @@ function CardsBuilderPanel({ onClose }: { onClose: () => void }) {
   const endResize = () => { resizeRef.current = null; };
 
   return createPortal(
-    <div
+    <motion.div
       data-visual-ui
       data-cards-panel-root
       dir="rtl"
+      initial={{ opacity: 0, scale: 0.96, y: 12 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
       className="fixed z-[10005] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
-      style={{ top: pos ? pos.y : 80, left: pos ? pos.x : 16, width: size.w, height: size.h }}
+      style={{ top: pos ? pos.y : 80, left: pos ? pos.x : 16, width: size.w, height: size.h, transformOrigin: 'top left' }}
     >
       <div
         onPointerDown={startDrag}
         onPointerMove={onDrag}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        className="flex items-center justify-between gap-2 px-4 py-3 bg-teal-600 text-white cursor-move select-none touch-none shrink-0"
+        className="flex items-center justify-between gap-2 px-4 py-3 bg-gradient-to-l from-teal-600 to-emerald-600 text-white cursor-move select-none touch-none shrink-0"
       >
         <div className="flex items-center gap-2 min-w-0">
           <Move className="w-4 h-4 shrink-0" />
@@ -1714,7 +1718,7 @@ function CardsBuilderPanel({ onClose }: { onClose: () => void }) {
           <path d="M9 1 L1 9 M9 5 L5 9" />
         </svg>
       </div>
-    </div>,
+    </motion.div>,
     document.body
   );
 }
