@@ -291,7 +291,7 @@ body {
     flex-wrap: nowrap !important;
     grid-template-columns: none !important;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: hidden;   /* فقط حرکت افقی؛ هیچ جابه‌جایی عمودی داخل کاروسل نباشد */
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x pan-y;
