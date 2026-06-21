@@ -225,14 +225,14 @@ export default function HotelCard({ hotel, index = 0 }: HotelCardProps) {
             </div>
           )}
 
-          {/* Price on image */}
-          <div className="absolute bottom-3 right-3">
-            <div className="bg-white/95 backdrop-blur-md rounded-xl px-3 py-2 shadow-lg">
+          {/* Price on image — کادر قیمت روی موبایل کوچک‌تر */}
+          <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3">
+            <div className="bg-white/95 backdrop-blur-md rounded-lg sm:rounded-xl px-2 py-1 sm:px-3 sm:py-2 shadow-lg">
               <div className="flex items-baseline gap-1">
-                <span className="text-lg font-bold" style={{ color: theme.colors.priceBadgeColor }}>
+                <span className="text-sm sm:text-lg font-bold" style={{ color: theme.colors.priceBadgeColor }}>
                   {hotel.pricePerNight.toLocaleString('fa-IR')}
                 </span>
-                <span className="text-xs text-gray-500">تومان</span>
+                <span className="text-[10px] sm:text-xs text-gray-500">تومان</span>
               </div>
             </div>
           </div>
@@ -244,7 +244,7 @@ export default function HotelCard({ hotel, index = 0 }: HotelCardProps) {
           <div className="flex items-start justify-between gap-3 mb-3">
             <div className="flex-1 min-w-0">
               <h3
-                className="font-bold text-base leading-tight mb-2 truncate"
+                className="font-bold text-sm sm:text-base leading-tight mb-2 truncate"
                 style={{ color: theme.colors.textPrimary }}
               >
                 {hotel.name}
