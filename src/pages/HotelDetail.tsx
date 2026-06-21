@@ -66,6 +66,7 @@ export default function HotelDetail() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   useEffect(() => {
     setCheckIn(filters.checkIn || '');
@@ -223,7 +224,48 @@ export default function HotelDetail() {
 
       {/* Photo gallery collage */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3">
-        <div className="flex gap-2 h-[280px] md:h-[440px]">
+        {/* Mobile gallery — گالری افقی قابل‌سوایپ که همهٔ عکس‌ها را نشان می‌دهد */}
+        <div className="sm:hidden">
+          <div
+            className="flex gap-2 overflow-x-auto h-[280px] rounded-2xl detail-gallery-scroll"
+            style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch', touchAction: 'pan-x pan-y' }}
+            onScroll={(e) => {
+              const el = e.currentTarget;
+              const idx = Math.round(Math.abs(el.scrollLeft) / el.clientWidth);
+              if (idx !== galleryIndex) setGalleryIndex(idx);
+            }}
+          >
+            {galleryImages.map((img, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => openLightbox(i)}
+                className="relative shrink-0 w-full h-full rounded-2xl overflow-hidden"
+                style={{ scrollSnapAlign: 'center', scrollSnapStop: 'always' }}
+              >
+                <img src={img} alt={`${hotel.name} ${i + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+          {galleryImages.length > 1 && (
+            <div className="flex justify-center items-center gap-1.5 mt-3">
+              {galleryImages.map((_, i) => (
+                <span
+                  key={i}
+                  className="rounded-full transition-all"
+                  style={{
+                    width: i === galleryIndex ? 20 : 8,
+                    height: 8,
+                    backgroundColor: i === galleryIndex ? theme.colors.primary : '#d1d5db',
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Desktop/tablet collage */}
+        <div className="hidden sm:flex gap-2 h-[280px] md:h-[440px]">
           {/* Large cover image (right in RTL) */}
           <button
             type="button"

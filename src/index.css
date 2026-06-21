@@ -319,3 +319,8 @@ body {
     scroll-snap-stop: always;
   }
 }
+
+
+/* گالری عکس صفحهٔ جزییات روی موبایل — پنهان‌کردن نوار اسکرول */
+.detail-gallery-scroll::-webkit-scrollbar { display: none; }
+.detail-gallery-scroll { scrollbar-width: none; -ms-overflow-style: none; }
